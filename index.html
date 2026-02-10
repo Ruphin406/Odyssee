@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Odyssée Cognitive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo" id="logoAdmin">L'Odyssée<span> Cognitive</span></div>
+        <div class="nav-right">
+        <button id="notifBtn" class="nav-icon"><i class="fas fa-bell"></i></button>
+    </div>
+        <div class="nav-right">
+            <button id="contactModalBtn" class="btn-history"><i class="fas fa-history"></i> Histoire</button>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rechercher...">
+            </div>
+        </div>
+    </nav>
+
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            
+            <div class="history-content">
+                <h2><i class="fas fa-book-open"></i> Histoire</h2>
+                <p>
+                    Fondé par <span>Ruphin kwibe deluna</span>
+                    Passionné de science, de téchnologie et de philosophie, je crée ce blog pour partager mes réflexions et découverte avec le monde
+                </p>
+                <hr>
+                <div class="mini-form">
+                    <h3>Laisser une trace</h3>
+                    <textarea id="visitorMsg" placeholder="Votre pensée..."></textarea>
+                    <button onclick="sendVisitorMessage()" class="btn-send">Envoyer</button>
+                </div>
+                <div class="notif-help" style="margin-top: 20px; font-size: 0.8rem; color: var(--muted); border: 1px dashed #444; padding: 10px;">
+    <p><i class="fas fa-info-circle"></i> <strong>Alerte App :</strong> Pour recevoir nos analyses en temps réel, cliquez sur la cloche <i class="fas fa-bell"></i> en haut de page et autorisez les notifications.</p>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="admin-panel" style="display:none;">
+        <div class="admin-header">
+            <button onclick="switchTab('publier')" id="btn-pub" class="tab-btn active">Publication</button>
+            <button onclick="switchTab('inbox')" id="btn-inbox" class="tab-btn">Messages Reçus</button>
+        </div>
+        
+    <div class="nav-right">
+        <button id="notifBtn" class="nav-icon"><i class="fas fa-bell"></i></button>
+    </div>
+
+<div id="tab-publier" class="admin-tab-content">
+    <div class="admin-grid">
+        <input type="text" id="postTitle" placeholder="Titre">
+        <input type="text" id="postTag" placeholder="Catégorie">
+        <input type="text" id="postImage" placeholder="Lien image">
+        <textarea id="postContent" placeholder="Texte de l'article..."></textarea>
+        <label style="font-size: 0.8rem; color: var(--accent);">
+            <input type="checkbox" id="sendPush"> Envoyer une notification aux utilisateurs
+        </label>
+        <button id="publishBtn">Propulser & Alerter</button>
+    </div>
+</div>
+
+        <div id="tab-inbox" class="admin-tab-content" style="display:none;">
+            <div id="messages-container" class="inbox-list"></div>
+        </div>
+    </div>
+
+    <main id="app-container" class="content-wrapper"></main>
+    
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+        <p>© 2026 L'Odyssée Cognitive - Ingénierie & Pensée</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxNjwijjuTGnr1M1eaYT7P5mCH2JVpVBA",
+            authDomain: "odyssee-blog.firebaseapp.com",
+            projectId: "odyssee-blog",
+            storageBucket: "odyssee-blog.firebasestorage.app",
+            messagingSenderId: "451372565307",
+            appId: "1:451372565307:web:4f812f921be71250096d1e",
+            databaseURL: "https://odyssee-blog-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

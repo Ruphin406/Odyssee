@@ -1,0 +1,269 @@
+:root {
+    --bg: #1a1a1a;
+    --card-bg: #242424;
+    --accent: #8bc34a;
+    --text: #e0e0e0;
+    --muted: #888;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding-top: 80px;
+}
+
+h1, h2, .logo { font-family: 'Open Sans', sans-serif; }
+
+/* Navbar Ultra-propre */
+.navbar {
+    position: fixed; top: 0; width: 100%; height: 70px;
+    background: rgba(26, 26, 26, 0.95);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%; box-sizing: border-box; z-index: 100;
+    border-bottom: 1px solid #333;
+}
+
+.logo span { color: var(--accent); }
+
+/* Articles */
+.content-wrapper { max-width: 800px; margin: 0 auto; padding: 20px; }
+.post-card {
+    background: var(--card-bg);
+    margin-bottom: 50px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border: 1px solid #333; /* Ajoute une légère structure */
+}
+/* Appliqué à toutes les images d'articles */
+.post-card img {
+    width: 80% !important; /* Force la largeur à 80% */
+    height: 300px;
+    margin: 20px auto; /* Centre l'image avec un espace au dessus */
+    display: block; /* Nécessaire pour le centrage auto */
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    filter: grayscale(15%); /* Un léger voile mélancolique */
+}
+
+.post-content { padding: 30px; }
+.post-description {
+    position: relative;
+    max-height: 4.5em; /* Limite à 3 lignes environ */
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+/* L'effet de fondu transparent au bas du texte */
+.post-description:not(.expanded)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(transparent, var(--card-bg));
+    pointer-events: none;
+}
+
+.post-description.expanded {
+    max-height: 2000px; /* Permet de tout lire */
+}
+
+/* Bouton "Voir plus" discret */
+.btn-more {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 10px 0;
+    text-decoration: underline;
+}
+
+/* Modal & Buttons */
+.modal { display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); }
+.modal-content { background: var(--card-bg); margin: 10% auto; padding: 40px; width: 90%; max-width: 500px; border-radius: 15px; position: relative; }
+.close-modal { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; color: var(--muted); }
+
+.btn-history { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 8px 15px; border-radius: 20px; cursor: pointer; margin-right: 15px; }
+.btn-history:hover { background: var(--accent); color: white; }
+
+/* Admin */
+.admin-panel { background: #222; border: 1px solid var(--accent); margin: 20px auto; max-width: 800px; padding: 25px; border-radius: 8px; }
+.admin-grid { display: flex; flex-direction: column; gap: 15px; }
+.admin-grid input, .admin-grid textarea { background: #333; border: 1px solid #444; color: white; padding: 12px; border-radius: 5px; }
+#publishBtn { background: var(--accent); color: white; border: none; padding: 15px; cursor: pointer; font-weight: bold; border-radius: 5px; }
+
+/* Image à 80% de la largeur sur mobile */
+@media (max-width: 600px) {
+    .post-card img {
+        width: 80%;
+        margin: 0 auto;
+        display: block;
+        height: 250px;
+    }
+}
+
+/* Style des commentaires */
+.comment-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    display: none; /* Caché par défaut */
+}
+
+.comment-item {
+    background: rgba(255,255,255,0.03);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.btn-audio {
+    background: var(--link-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Limitation du texte à 3 lignes avec dégradé */
+.post-description {
+    position: relative;
+    max-height: 4.5em; /* Environ 3 lignes */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.post-description.expanded {
+    max-height: 2000px; /* Déplie tout le texte */
+}
+
+/* Le dégradé transparent quand c'est fermé */
+.post-description:not(.expanded)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(transparent, var(--card-bg));
+}
+
+.btn-more {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+/* Style pour le champ nom dans les commentaires */
+.comment-inputs input {
+    background: #333;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nav-icon {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: 0.3s;
+}
+
+.nav-icon:hover { color: var(--accent); }
+
+.btn-share {
+    background: none;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-share:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Overlay de partage */
+.share-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.share-menu {
+    background: var(--card-bg);
+    padding: 25px; border-radius: 15px;
+    text-align: center; border: 1px solid var(--accent);
+}
+
+.share-icons { display: flex; gap: 20px; margin-top: 20px; }
+
+.s-icon {
+    font-size: 24px; width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; color: white; text-decoration: none;
+    transition: 0.3s;
+}
+
+.wa { background: #25D366; }
+.fb { background: #1877F2; }
+.tw { background: #1DA1F2; }
+.cp { background: #555; border: none; cursor: pointer; }
+
+.s-icon:hover { transform: scale(1.1); filter: brightness(1.2); }
+
+
+/* Animation au survol des cartes pour un effet premium */
+.post-card {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.post-card:active {
+    transform: scale(0.98); /* Effet de pression sur mobile */
+}
+
+/* Scrollbar élégante et sombre */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Message d'aide pour l'installation (optionnel) */
+.install-banner {
+    background: var(--accent);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    position: sticky;
+    top: 70px;
+    z-index: 90;
+}
+
+button, .logo, .nav-icon {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
