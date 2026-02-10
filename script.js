@@ -293,16 +293,16 @@ function loadComments(id) {
 
 // Fonction pour vider tout le blog
 window.clearBlog = () => {
-    const confirmation = confirm("ATTENTION : Cette action supprimera TOUS les articles définitivement. Continuer ?");
+    const confirmation = confirm("⚠️ ATTENTION : Voulez-vous vraiment supprimer TOUS les articles ?");
     if (confirmation) {
-        const secondeConfirmation = prompt("Tapez 'SUPPRIMER' pour confirmer la destruction totale.");
-        if (secondeConfirmation === "SUPPRIMER") {
+        const securite = prompt("Tapez 'SUPPRIMER' pour confirmer la destruction totale.");
+        if (securite === "SUPPRIMER") {
             db.ref('articles').set(null) // Efface la branche articles dans Firebase
             .then(() => {
-                alert("Le blog a été vidé avec succès.");
+                alert("Le labo a été vidé avec succès.");
             })
             .catch(error => {
-                alert("Erreur lors de la suppression : " + error.message);
+                alert("Erreur : " + error.message);
             });
         }
     }
